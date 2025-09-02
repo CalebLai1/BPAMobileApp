@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 1rem;
+        }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 16px;
+        }
+        .header-title {
+            text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+        }
+        body::-webkit-scrollbar { width: 5px; }
+        body::-webkit-scrollbar-track { background: transparent; }
+        body::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header class="pt-10 mb-6 px-2">
+        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Player Stats</h1>
+        <p class="text-sm text-text-muted-color">Track performance across all games</p>
+    </header>
+    <div class="px-2">
+        <input type="text" placeholder="Search player or team..." class="w-full bg-surface-color p-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-color">
+    </div>
+    
+    <div class="mt-6 px-2">
+        <h3 class="font-teko text-xl text-secondary-color">Trending Players</h3>
+        <div class="card mt-2">
+            <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
+                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=Tenz" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-bold">Tenz</p>
+                    <p class="text-xs text-text-muted-color">Sentinels - VALORANT</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
+            </a>
+            <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
+                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=JK" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-bold">Jknaps</p>
+                    <p class="text-xs text-text-muted-color">G2 Esports - Rocket League</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
+            </a>
+             <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
+                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=ML" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-bold">MkLeo</p>
+                    <p class="text-xs text-text-muted-color">Super Smash Bros.</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
+            </a>
+        </div>
+    </div>
+
+     <div class="mt-6 px-2 pb-20">
+        <h3 class="font-teko text-xl text-secondary-color">Team Rankings</h3>
+         <div class="card mt-2 p-3">
+            <div class="flex items-center justify-between text-sm mb-2 p-2 rounded-md bg-gray-900">
+                 <span>1. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=C9" class="inline rounded-full mr-2 w-5 h-5"> Cloud9 (VAL)</span>
+                 <span class="text-green-400">W: 5 / L: 0</span>
+             </div>
+             <div class="flex items-center justify-between text-sm mb-2 p-2">
+                 <span>2. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=G2" class="inline rounded-full mr-2 w-5 h-5"> G2 Esports (RL)</span>
+                  <span class="text-green-400">W: 4 / L: 1</span>
+             </div>
+             <div class="flex items-center justify-between text-sm mb-2 p-2">
+                 <span>3. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=100T" class="inline rounded-full mr-2 w-5 h-5"> 100 Thieves (VAL)</span>
+                  <span class="text-green-400">W: 4 / L: 1</span>
+             </div>
+         </div>
+    </div>
+</body>
+</html>

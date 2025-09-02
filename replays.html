@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replays</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 1rem;
+        }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 16px;
+        }
+        .header-title {
+            text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+        }
+        body::-webkit-scrollbar { width: 5px; }
+        body::-webkit-scrollbar-track { background: transparent; }
+        body::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header class="pt-10 mb-6 px-2">
+        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Match Replays</h1>
+        <p class="text-sm text-text-muted-color">Catch up on all the action</p>
+    </header>
+    
+    <div class="card p-4">
+        <div class="relative">
+            <img src="https://placehold.co/600x400/121212/00c2ff?text=Valorant+Grand+Final" class="rounded-lg w-full">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
+            </div>
+        </div>
+        <h3 class="font-bold mt-3">GRAND FINAL: Cloud9 vs 100 Thieves</h3>
+        <p class="text-xs text-text-muted-color">VALORANT - Full Match VOD</p>
+    </div>
+
+    <div class="card p-4">
+        <div class="relative">
+            <img src="https://placehold.co/600x400/121212/6a0dad?text=Rocket+League+Upset" class="rounded-lg w-full">
+             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
+            </div>
+        </div>
+        <h3 class="font-bold mt-3">UPSET ALERT: G2 vs FaZe Clan</h3>
+        <p class="text-xs text-text-muted-color">Rocket League - Highlights</p>
+    </div>
+    
+    <div class="card p-4 pb-20">
+        <div class="relative">
+            <img src="https://placehold.co/600x400/121212/FFFF00?text=Smash+Bros+Clutch" class="rounded-lg w-full">
+             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
+            </div>
+        </div>
+        <h3 class="font-bold mt-3">DOWN TO THE WIRE: MkLeo vs Sparg0</h3>
+        <p class="text-xs text-text-muted-color">Super Smash Bros. - Last Stock</p>
+    </div>
+</body>
+</html>

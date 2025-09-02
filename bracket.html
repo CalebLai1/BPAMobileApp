@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tournament Bracket - Updated Header</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+            --connector-color: #4a4a4a;
+            --winner-color: #00c2ff;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow: hidden;
+        }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .header-title { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color); }
+        .tabs { border-bottom: 1px solid var(--surface-color); }
+        .tab-btn {
+            padding: 10px 15px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted-color);
+            font-family: 'Teko', sans-serif;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-btn.active {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+        .bracket-content { display: none; }
+        .bracket-content.active { display: block; }
+        .bracket-container {
+            flex-grow: 1;
+            overflow: hidden;
+            cursor: grab;
+            position: relative;
+            height: 100%;
+        }
+        .bracket-container:active { cursor: grabbing; }
+        .tournament-bracket {
+            display: flex;
+            width: fit-content;
+            transform-origin: 0 0;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        .tournament-bracket__round {
+            flex-shrink: 0;
+            width: 240px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .tournament-bracket__round-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        .tournament-bracket__list {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .tournament-bracket__item {
+            position: relative;
+            padding: 2em 0;
+        }
+        .tournament-bracket__item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 1.5rem;
+            height: 50%;
+            border-right: 2px solid var(--connector-color);
+        }
+        .tournament-bracket__item:nth-child(odd)::after {
+            top: 50%;
+            border-top: 2px solid var(--connector-color);
+            border-top-right-radius: 0.8em;
+        }
+        .tournament-bracket__item:nth-child(even)::after {
+            bottom: 50%;
+            border-bottom: 2px solid var(--connector-color);
+            border-bottom-right-radius: 0.8em;
+        }
+        .tournament-bracket__round:last-child .tournament-bracket__item::after { display: none; }
+        .tournament-bracket__match::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.5rem;
+            height: 2px;
+            background-color: var(--connector-color);
+        }
+        .tournament-bracket__round:first-child .tournament-bracket__match::before { display: none; }
+        .tournament-bracket__match {
+            background-color: var(--surface-color);
+            padding: 0.75em 1em;
+            border-radius: 6px;
+            position: relative;
+            width: 100%;
+            display: table;
+        }
+        .tournament-bracket__team { display: table-row; }
+        .tournament-bracket__team--winner .tournament-bracket__name,
+        .tournament-bracket__team--winner .tournament-bracket__score {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .tournament-bracket__team--winner .tournament-bracket__score { color: var(--winner-color); }
+        .tournament-bracket__name {
+            font-size: 0.9rem;
+            color: var(--text-muted-color);
+            padding: 0.4em;
+        }
+        .tournament-bracket__score {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-muted-color);
+            text-align: right;
+            padding: 0.4em;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col h-screen">
+
+    <header class="pt-10 pb-4 px-6 bg-surface-color/80 backdrop-blur-sm border-b border-gray-700">
+        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Tournament Brackets</h1>
+        <p class="text-sm text-text-muted-color">Live Updates & Results</p>
+    </header>
+
+    <div class="tabs flex gap-2 px-4 flex-shrink-0">
+        <button class="tab-btn active" data-target="#valorant-bracket">VALORANT</button>
+        <button class="tab-btn" data-target="#rl-bracket">ROCKET LEAGUE</button>
+        <button class="tab-btn" data-target="#smash-bracket">SMASH BROS.</button>
+    </div>
+
+    <main class="flex-grow flex flex-col min-h-0">
+        <div id="valorant-bracket" class="bracket-content active bracket-container">
+            <div class="tournament-bracket">
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Quarterfinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sentinels</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">LOUD</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li>
+                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Paper Rex</td><td class="tournament-bracket__score">0</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Gen.G</td><td class="tournament-bracket__score">2</td></tr></tbody></table></div></li>
+                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Fnatic</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">100 Thieves</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li>
+                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">EDward Gaming</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Karmine Corp</td><td class="tournament-bracket__score">0</td></tr></tbody></table></div></li>
+                    </ul>
+                </div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sentinels</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Gen.G</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Fnatic</td><td class="tournament-bracket__score">0</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">EDward Gaming</td><td class="tournament-bracket__score">2</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sentinels</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">EDward Gaming</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li></ul></div>
+            </div>
+        </div>
+
+        <div id="rl-bracket" class="bracket-content bracket-container">
+            <div class="tournament-bracket">
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Quarterfinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Karmine Corp</td><td class="tournament-bracket__score">4</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Moist Esports</td><td class="tournament-bracket__score">2</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">G2 Stride</td><td class="tournament-bracket__score">4</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Rule One</td><td class="tournament-bracket__score">3</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Team BDS</td><td class="tournament-bracket__score">4</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Team Falcons</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Gen.G Mobil1</td><td class="tournament-bracket__score">4</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">FaZe Clan</td><td class="tournament-bracket__score">3</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Karmine Corp</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">G2 Stride</td><td class="tournament-bracket__score">4</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Team BDS</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Gen.G Mobil1</td><td class="tournament-bracket__score">4</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">G2 Stride</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Gen.G Mobil1</td><td class="tournament-bracket__score">4</td></tr></tbody></table></div></li></ul></div>
+            </div>
+        </div>
+
+        <div id="smash-bracket" class="bracket-content bracket-container">
+            <div class="tournament-bracket">
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Quarterfinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">MkLeo</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Miya</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sparg0</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Light</td><td class="tournament-bracket__score">0</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">acola</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Glutonny</td><td class="tournament-bracket__score">2</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Tweek</td><td class="tournament-bracket__score">1</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sonix</td><td class="tournament-bracket__score">3</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">MkLeo</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">Sparg0</td><td class="tournament-bracket__score">3</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">acola</td><td class="tournament-bracket__score">3</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Sonix</td><td class="tournament-bracket__score">1</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Sparg0</td><td class="tournament-bracket__score">2</td></tr><tr class="tournament-bracket__team tournament-bracket__team--winner"><td class="tournament-bracket__name">acola</td><td class="tournament-bracket__score">4</td></tr></tbody></table></div></li></ul></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // All JavaScript remains the same as the previous version.
+        // It correctly handles the pan, zoom, and tab-switching functionality.
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.bracket-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    const target = document.querySelector(tab.dataset.target);
+                    if (target) {
+                        target.classList.add('active');
+                        if (!target.dataset.initialized) {
+                            initPanAndZoom(target);
+                            target.dataset.initialized = 'true';
+                        }
+                    }
+                });
+            });
+            const firstActiveTab = document.querySelector('.tab-btn.active');
+            if (firstActiveTab) {
+                setTimeout(() => {
+                    const activeContainer = document.querySelector(firstActiveTab.dataset.target);
+                    if (activeContainer && !activeContainer.dataset.initialized) {
+                        initPanAndZoom(activeContainer);
+                        activeContainer.dataset.initialized = 'true';
+                    }
+                }, 100);
+            }
+            function initPanAndZoom(container) {
+                const bracket = container.querySelector('.tournament-bracket');
+                if (!bracket) return;
+                const urlParams = new URLSearchParams(window.location.search);
+                const navOffset = parseInt(urlParams.get('navHeight'), 10) || 0;
+                let scale = 1, translateX = 0, translateY = 0, isDragging = false;
+                let startX, startY, initialPinchDistance = null;
+                function applyTransform() {
+                    const bracketRect = bracket.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
+                    const minX = containerRect.width - bracketRect.width;
+                    const minY = (containerRect.height - navOffset) - bracketRect.height;
+                    translateX = Math.max(minX, Math.min(0, translateX));
+                    translateY = Math.max(minY, Math.min(0, translateY));
+                    bracket.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                }
+                function fitBracketToContainer() {
+                    const containerWidth = container.clientWidth;
+                    const containerHeight = container.clientHeight - navOffset;
+                    const bracketWidth = bracket.scrollWidth;
+                    const bracketHeight = bracket.scrollHeight;
+                    const scaleX = containerWidth / bracketWidth;
+                    const scaleY = containerHeight / bracketHeight;
+                    scale = Math.min(scaleX, scaleY, 1);
+                    translateX = (containerWidth - bracketWidth * scale) / 2;
+                    translateY = (containerHeight - bracketHeight * scale) / 2;
+                    applyTransform();
+                }
+                container.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    container.style.cursor = 'grabbing';
+                });
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const zoomIntensity = 0.1;
+                    const delta = e.deltaY > 0 ? -1 : 1;
+                    const newScale = scale * (1 + delta * zoomIntensity);
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    translateX = mouseX - (mouseX - translateX) * (newScale / scale);
+                    translateY = mouseY - (mouseY - translateY) * (newScale / scale);
+                    scale = newScale;
+                    applyTransform();
+                });
+                container.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 1) {
+                        isDragging = true;
+                        startX = e.touches[0].clientX - translateX;
+                        startY = e.touches[0].clientY - translateY;
+                    } else if (e.touches.length === 2) {
+                        isDragging = false;
+                        initialPinchDistance = Math.hypot(
+                            e.touches[0].clientX - e.touches[1].clientX,
+                            e.touches[0].clientY - e.touches[1].clientY
+                        );
+                    }
+                });
+                const handleMove = (clientX, clientY) => {
+                    if (!isDragging) return;
+                    translateX = clientX - startX;
+                    translateY = clientY - startY;
+                    applyTransform();
+                };
+                const handleEnd = () => {
+                    isDragging = false;
+                    initialPinchDistance = null;
+                    container.style.cursor = 'grab';
+                };
+                container.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+                container.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (e.touches.length === 1 && isDragging) {
+                        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                    } else if (e.touches.length === 2 && initialPinchDistance) {
+                        const currentPinchDistance = Math.hypot(
+                            e.touches[0].clientX - e.touches[1].clientX,
+                            e.touches[0].clientY - e.touches[1].clientY
+                        );
+                        const newScale = scale * (currentPinchDistance / initialPinchDistance);
+                        const rect = container.getBoundingClientRect();
+                        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+                        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+                        translateX = midX - (midX - translateX) * (newScale / scale);
+                        translateY = midY - (midY - translateY) * (newScale / scale);
+                        scale = newScale;
+                        initialPinchDistance = currentPinchDistance;
+                        applyTransform();
+                    }
+                });
+                document.addEventListener('mouseup', handleEnd);
+                container.addEventListener('mouseleave', handleEnd);
+                container.addEventListener('touchend', handleEnd);
+                fitBracketToContainer();
+                window.addEventListener('resize', fitBracketToContainer);
+            }
+        });
+    </script>
+</body>
+</html>

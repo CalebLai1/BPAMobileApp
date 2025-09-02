@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .header-title { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color); }
+        .chat-messages::-webkit-scrollbar { width: 5px; }
+        .chat-messages::-webkit-scrollbar-track { background: transparent; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+        .chat-bubble { max-width: 75%; }
+        .chat-bubble.me { background-color: var(--primary-color); }
+        .chat-bubble.other { background-color: var(--surface-color); }
+    </style>
+</head>
+<body>
+    <header class="pt-10 pb-4 px-6 bg-surface-color/80 backdrop-blur-sm border-b border-gray-700">
+        <h1 class="text-3xl font-teko tracking-wider uppercase header-title">Community Chat</h1>
+        <p class="text-sm text-text-muted-color flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span>3,482 Fans Online</p>
+    </header>
+    <div class="flex-grow p-4 overflow-y-auto space-y-4 chat-messages">
+        <!-- Chat Messages -->
+        <div class="flex justify-start">
+            <div class="chat-bubble other p-3 rounded-lg">
+                <p class="font-bold text-sm text-secondary-color">xX_GamerGod_Xx</p>
+                <p class="text-sm">That was an insane clutch from Tenz!</p>
+            </div>
+        </div>
+         <div class="flex justify-end">
+            <div class="chat-bubble me p-3 rounded-lg">
+                <p class="text-sm">I know right! Best player in the tourney.</p>
+            </div>
+        </div>
+        <div class="flex justify-start">
+             <img src="https://placehold.co/30x30/1e1e1e/FFF?text=A" class="rounded-full mr-2 self-end">
+            <div class="chat-bubble other p-3 rounded-lg">
+                <p class="font-bold text-sm text-purple-400">AnnaRL</p>
+                <p class="text-sm">G2 is looking unstoppable in Rocket League. That aerial was art.</p>
+            </div>
+        </div>
+         <div class="flex justify-start">
+             <img src="https://placehold.co/30x30/1e1e1e/FFF?text=A" class="rounded-full mr-2 self-end">
+            <div class="chat-bubble other p-3 rounded-lg">
+                <p class="font-bold text-sm text-purple-400">AnnaRL</p>
+                <p class="text-sm">Does anyone have the stats for Jknaps?</p>
+            </div>
+        </div>
+         <div class="flex justify-end">
+            <div class="chat-bubble me p-3 rounded-lg">
+                <p class="text-sm">Check the stats screen, they update it live!</p>
+            </div>
+        </div>
+         <div class="flex justify-start">
+            <div class="chat-bubble other p-3 rounded-lg">
+                <p class="font-bold text-sm text-secondary-color">xX_GamerGod_Xx</p>
+                <p class="text-sm">Who's playing next in Smash?</p>
+            </div>
+        </div>
+         <div class="flex justify-end">
+            <div class="chat-bubble me p-3 rounded-lg">
+                <p class="text-sm">Not sure, but the bracket page should have it.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Chat Input -->
+    <div class="p-4 bg-surface-color/80 backdrop-blur-sm border-t border-gray-700 mt-auto">
+        <div class="flex items-center bg-background-color rounded-full p-1">
+            <input type="text" placeholder="Type your message..." class="bg-transparent w-full p-2 focus:outline-none ml-2 text-white">
+            <button class="bg-primary-color rounded-full w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-paper-plane text-white"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
