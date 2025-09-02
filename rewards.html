@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem 1rem 6rem;
+        }
+        .teko-title { font-family: 'Teko', sans-serif; }
+        .card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .loot-item {
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="space-y-6">
+        <header class="text-center">
+            <h1 class="teko-title text-5xl font-bold tracking-wider">Loot Drops 🎁</h1>
+            <p class="text-base text-muted-color">Your Watch-to-Win Incentives</p>
+        </header>
+
+        <div class="card">
+            <h2 class="teko-title text-2xl font-semibold mb-2">How It Works</h2>
+            <p class="text-sm text-muted-color">
+                While watching live matches in the app, you have a chance to receive random Loot Drops! Keep watching to collect exclusive digital rewards, discounts, and giveaway entries.
+            </p>
+        </div>
+
+        <div>
+            <h2 class="teko-title text-3xl font-semibold mb-4 ml-1">My Loot</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card loot-item text-center p-4">
+                    <div class="text-4xl mb-2">🏅</div>
+                    <h3 class="font-bold">Founder's Badge</h3>
+                    <p class="text-xs text-muted-color">Exclusive Profile Badge</p>
+                </div>
+                
+                <div class="card loot-item text-center p-4">
+                    <div class="text-4xl mb-2">🎟️</div>
+                    <h3 class="font-bold">Giveaway Entry</h3>
+                    <p class="text-xs text-muted-color">Official Merchandise</p>
+                </div>
+                
+                <div class="card loot-item text-center p-4">
+                    <div class="text-4xl mb-2">💸</div>
+                    <h3 class="font-bold">15% OFF</h3>
+                    <p class="text-xs text-muted-color">Sponsor Store Code</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

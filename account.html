@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem 1rem 6rem;
+        }
+        .teko-title { font-family: 'Teko', sans-serif; }
+        .card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .achievement-item.unlocked { color: var(--secondary-color); }
+        .achievement-item.locked { color: var(--text-muted-color); opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="space-y-6">
+        <div class="card flex items-center space-x-4">
+            <img src="https://i.pravatar.cc/80" alt="User Avatar" class="w-20 h-20 rounded-full border-2 border-primary-color">
+            <div>
+                <h2 class="text-2xl font-bold">UsernameHere</h2>
+                <p class="teko-title text-xl text-yellow-400">🏅 Gold Fan</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="teko-title text-2xl font-semibold mb-3">My Achievements 🏆</h3>
+            <ul class="space-y-3">
+                <li class="achievement-item unlocked flex items-center"><i class="fas fa-check-circle w-6"></i><span>"First Five": Watched 5 matches.</span></li>
+                <li class="achievement-item unlocked flex items-center"><i class="fas fa-check-circle w-6"></i><span>"Town Crier": Posted 50 comments.</span></li>
+                <li class="achievement-item locked flex items-center"><i class="fas fa-lock w-6"></i><span>"The Oracle": Follow a team to the finals.</span></li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3 class="teko-title text-2xl font-semibold mb-3">Followed Teams & Players ⭐</h3>
+            <div class="flex space-x-4">
+                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Team A</span>
+                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">PlayerX</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="teko-title text-2xl font-semibold mb-3">Notification Settings 🔔</h3>
+            <ul class="space-y-2">
+                <li class="flex justify-between items-center"><p>Match Start Times</p><i class="fas fa-toggle-on text-2xl text-primary-color"></i></li>
+                <li class="flex justify-between items-center"><p>Score Updates</p><i class="fas fa-toggle-on text-2xl text-primary-color"></i></li>
+                <li class="flex justify-between items-center"><p>Bracket Changes</p><i class="fas fa-toggle-off text-2xl text-gray-500"></i></li>
+            </ul>
+        </div>
+
+        <button class="w-full bg-red-600/80 py-2.5 rounded-lg font-bold text-lg hover:bg-red-600 transition-colors">Logout</button>
+    </div>
+</body>
+</html>

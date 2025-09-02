@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NECS Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #00c2ff;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-muted-color: #a0a0a0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem 1rem 6rem; /* Padding for notch and nav bar */
+        }
+        .teko-title { font-family: 'Teko', sans-serif; }
+        .card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-y-6">
+        <header class="text-center">
+            <h1 class="teko-title text-5xl font-bold tracking-wider">NECS 2026</h1>
+            <p class="text-base text-muted-color">Welcome to the National Esports Championship</p>
+        </header>
+
+        <div class="card">
+             <h2 class="teko-title text-2xl font-semibold mb-3 border-b border-gray-700 pb-2">Explore the Event</h2>
+             <div class="grid grid-cols-3 gap-4 text-center">
+                 <a href="stats.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
+                     <i class="fas fa-chart-bar text-2xl text-secondary-color"></i>
+                     <span class="block text-xs mt-1">Stats</span>
+                 </a>
+                 <a href="replays.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
+                     <i class="fas fa-video text-2xl text-secondary-color"></i>
+                     <span class="block text-xs mt-1">Replays</span>
+                 </a>
+                 <a href="chat.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
+                     <i class="fas fa-comments text-2xl text-secondary-color"></i>
+                     <span class="block text-xs mt-1">Chat</span>
+                 </a>
+             </div>
+        </div>
+
+        <div class="card">
+            <h2 class="teko-title text-2xl font-semibold mb-3">Livestream Schedule</h2>
+            <ul class="space-y-3">
+                <li class="flex justify-between items-center p-2 bg-gray-800 rounded-md">
+                    <div>
+                        <p class="font-bold">Team A vs Team B</p>
+                        <p class="text-sm text-muted-color">Sept 3, 2:00 PM</p>
+                    </div>
+                    <span class="text-red-500 font-bold animate-pulse">● LIVE</span>
+                </li>
+                <li class="flex justify-between items-center p-2">
+                    <div>
+                        <p class="font-bold">Team C vs Team D</p>
+                        <p class="text-sm text-muted-color">Sept 3, 4:00 PM</p>
+                    </div>
+                    <span class="text-gray-400">UPCOMING</span>
+                </li>
+            </ul>
+        </div>
+
+        <a href="#" class="block w-full text-center bg-primary-color py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity">
+            <i class="fas fa-ticket-alt mr-2"></i> Get Your Tickets!
+        </a>
+
+        <div class="card">
+            <h2 class="teko-title text-2xl font-semibold mb-3">Featured Teams</h2>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team A</span></div>
+                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team B</span></div>
+                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team C</span></div>
+                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team D</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
