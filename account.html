@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -29,17 +29,26 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        .achievement-item.unlocked { color: var(--secondary-color); }
+        .achievement-item.unlocked { color: var(--primary-color); }
         .achievement-item.locked { color: var(--text-muted-color); opacity: 0.6; }
+
+        /* Custom class for primary color text */
+        .text-primary {
+             color: var(--primary-color);
+        }
+        /* Add cursor pointer to toggles */
+        .toggle-btn {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="space-y-6">
         <div class="card flex items-center space-x-4">
-            <img src="https://i.pravatar.cc/80" alt="User Avatar" class="w-20 h-20 rounded-full border-2 border-primary-color">
+            <img src="https://placehold.co/80x80/1e1e1e/D4AF37?text=JD" alt="User Avatar" class="w-20 h-20 rounded-full border-2 border-primary" style="border-color: var(--primary-color)">
             <div>
-                <h2 class="text-2xl font-bold">UsernameHere</h2>
-                <p class="teko-title text-xl text-yellow-400">🏅 Gold Fan</p>
+                <h2 class="text-2xl font-bold">John Doe</h2>
+                <p class="teko-title text-xl" style="color: var(--secondary-color);">🏅 Gold Fan</p>
             </div>
         </div>
         
@@ -55,21 +64,40 @@
         <div class="card">
             <h3 class="teko-title text-2xl font-semibold mb-3">Followed Teams & Players ⭐</h3>
             <div class="flex space-x-4">
-                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Team A</span>
-                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">PlayerX</span>
+                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Fnatic</span>
+                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Sparg0</span>
+                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">G2 Stride</span>
             </div>
         </div>
         
         <div class="card">
             <h3 class="teko-title text-2xl font-semibold mb-3">Notification Settings 🔔</h3>
             <ul class="space-y-2">
-                <li class="flex justify-between items-center"><p>Match Start Times</p><i class="fas fa-toggle-on text-2xl text-primary-color"></i></li>
-                <li class="flex justify-between items-center"><p>Score Updates</p><i class="fas fa-toggle-on text-2xl text-primary-color"></i></li>
-                <li class="flex justify-between items-center"><p>Bracket Changes</p><i class="fas fa-toggle-off text-2xl text-gray-500"></i></li>
+                <li class="flex justify-between items-center"><p>Match Start Times</p><i class="fas fa-toggle-on text-2xl text-primary toggle-btn"></i></li>
+                <li class="flex justify-between items-center"><p>Score Updates</p><i class="fas fa-toggle-on text-2xl text-primary toggle-btn"></i></li>
+                <li class="flex justify-between items-center"><p>Bracket Changes</p><i class="fas fa-toggle-off text-2xl text-gray-500 toggle-btn"></i></li>
             </ul>
         </div>
 
-        <button class="w-full bg-red-600/80 py-2.5 rounded-lg font-bold text-lg hover:bg-red-600 transition-colors">Logout</button>
+        <button class="w-full bg-yellow-900/80 py-2.5 rounded-lg font-bold text-lg hover:bg-yellow-900 transition-colors">Logout</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Toggle the font awesome icon class
+                    button.classList.toggle('fa-toggle-on');
+                    button.classList.toggle('fa-toggle-off');
+
+                    // Toggle the color classes
+                    button.classList.toggle('text-primary');
+                    button.classList.toggle('text-gray-500');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

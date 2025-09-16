@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -18,7 +18,7 @@
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: #333;
+            background: #111;
         }
         .mode-switcher {
             display: flex;
@@ -39,7 +39,7 @@
             color: var(--text-color);
             background-color: var(--primary-color);
             border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(106, 13, 173, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
         }
         .mobile-emulator {
             background: var(--background-color);
@@ -81,14 +81,12 @@
             border-radius: 0 0 15px 15px;
             z-index: 100;
         }
-        
-        /* --- MODIFIED for Top-Right Hamburger Button --- */
         #nav-open-btn {
             position: absolute;
-            top: 15px;      /* Position from the top */
-            right: 15px;    /* Position from the right */
-            width: 44px;    /* Standard touch target size */
-            height: 44px;   /* Standard touch target size */
+            top: 50px; /* Shifted Down */
+            right: 15px;
+            width: 44px;
+            height: 44px;
             background: transparent;
             border: none;
             color: var(--text-muted-color);
@@ -104,8 +102,6 @@
             color: var(--text-color);
             transform: scale(1.1);
         }
-
-        /* Navigation Overlay (no changes needed here) */
         #nav-overlay {
             position: absolute;
             top: 0;
@@ -129,6 +125,26 @@
             pointer-events: auto;
             transform: scale(1);
         }
+        #nav-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted-color);
+            font-size: 2.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #nav-close-btn:hover {
+            color: white;
+            transform: rotate(90deg);
+        }
         .nav-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -151,15 +167,12 @@
         .grid-nav-item i {
             font-size: 28px;
             margin-bottom: 8px;
-            color: var(--secondary-color);
+            color: var(--primary-color);
         }
         .grid-nav-item span {
             font-size: 12px;
             font-weight: 500;
             display: block;
-        }
-        .grid-nav-item#nav-close-btn i {
-            color: #ff5555;
         }
     </style>
 </head>
@@ -170,12 +183,24 @@
     </div>
 
     <div id="emulator" class="mobile-emulator iphone-mode">
+        
+        <div class="absolute top-0 left-0 right-0 h-[44px] px-6 flex items-center justify-between text-white text-sm font-semibold z-[99]">
+            <span id="status-bar-time">8:46 PM</span>
+            <div class="flex items-center gap-2 text-xs">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
         <div class="notch"></div>
         <main class="screen-content">
             <iframe id="content-frame" src="./home.html" title="App Content"></iframe>
         </main>
         
         <div id="nav-overlay">
+            <button id="nav-close-btn"><i class="fas fa-times"></i></button>
+
             <div class="nav-grid">
                 <div class="grid-nav-item" data-screen-file="home.html"><i class="fas fa-home"></i><span>Home</span></div>
                 <div class="grid-nav-item" data-screen-file="scores.html"><i class="fas fa-crosshairs"></i><span>Scores</span></div>
@@ -184,8 +209,8 @@
                 <div class="grid-nav-item" data-screen-file="bracket.html"><i class="fas fa-sitemap"></i><span>Bracket</span></div>
                 <div class="grid-nav-item" data-screen-file="chat.html"><i class="fas fa-comments"></i><span>Chat</span></div>
                 <div class="grid-nav-item" data-screen-file="rewards.html"><i class="fas fa-gift"></i><span>Rewards</span></div>
+                <div class="grid-nav-item" data-screen-file="tickets.html"><i class="fas fa-ticket-alt"></i><span>Tickets</span></div>
                 <div class="grid-nav-item" data-screen-file="account.html"><i class="fas fa-user-circle"></i><span>Account</span></div>
-                <div class="grid-nav-item" id="nav-close-btn"><i class="fas fa-times-circle"></i><span>Close</span></div>
             </div>
         </div>
 
@@ -194,13 +219,28 @@
     </div>
 
     <script>
-        // All JavaScript logic remains the same and will work with the new button.
         document.addEventListener('DOMContentLoaded', function() {
+            const timeElement = document.getElementById('status-bar-time');
+
+            const updateTime = () => {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                timeElement.textContent = timeString;
+            };
+            updateTime(); 
+            setInterval(updateTime, 1000);
+
             const contentFrame = document.getElementById('content-frame');
             const navOpenBtn = document.getElementById('nav-open-btn');
             const navOverlay = document.getElementById('nav-overlay');
             const navCloseBtn = document.getElementById('nav-close-btn');
             const gridNavItems = document.querySelectorAll('.grid-nav-item[data-screen-file]');
+            const emulator = document.getElementById('emulator');
+            const modeBtns = document.querySelectorAll('.mode-btn');
 
             const openNav = () => navOverlay.classList.add('visible');
             const closeNav = () => navOverlay.classList.remove('visible');
@@ -220,9 +260,7 @@
                     closeNav();
                 });
             });
-
-            const emulator = document.getElementById('emulator');
-            const modeBtns = document.querySelectorAll('.mode-btn');
+            
             modeBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     modeBtns.forEach(b => b.classList.remove('active'));

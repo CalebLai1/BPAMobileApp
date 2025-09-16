@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -30,11 +30,11 @@
             margin-bottom: 16px;
         }
         .header-title {
-            text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
         }
         body::-webkit-scrollbar { width: 5px; }
         body::-webkit-scrollbar-track { background: transparent; }
-        body::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+        body::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -43,11 +43,11 @@
         <p class="text-sm text-text-muted-color">Track performance across all games</p>
     </header>
     <div class="px-2">
-        <input type="text" placeholder="Search player or team..." class="w-full bg-surface-color p-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-color">
+        <input type="text" placeholder="Search player or team..." class="w-full p-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2" style="background-color: var(--surface-color); --tw-ring-color: var(--primary-color);">
     </div>
     
     <div class="mt-6 px-2">
-        <h3 class="font-teko text-xl text-secondary-color">Trending Players</h3>
+        <h3 class="font-teko text-xl" style="color: var(--primary-color);">Trending Players</h3>
         <div class="card mt-2">
             <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
                 <img src="https://placehold.co/50x50/1e1e1e/FFF?text=Tenz" class="rounded-full">
@@ -77,7 +77,7 @@
     </div>
 
      <div class="mt-6 px-2 pb-20">
-        <h3 class="font-teko text-xl text-secondary-color">Team Rankings</h3>
+        <h3 class="font-teko text-xl" style="color: var(--primary-color);">Team Rankings</h3>
          <div class="card mt-2 p-3">
             <div class="flex items-center justify-between text-sm mb-2 p-2 rounded-md bg-gray-900">
                  <span>1. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=C9" class="inline rounded-full mr-2 w-5 h-5"> Cloud9 (VAL)</span>

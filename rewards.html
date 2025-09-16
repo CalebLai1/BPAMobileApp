@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -20,9 +20,12 @@
             font-family: 'Roboto', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            padding: 2rem 1rem 6rem;
+            padding: 1rem;
         }
-        .teko-title { font-family: 'Teko', sans-serif; }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .header-title {
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
         .card {
             background-color: var(--surface-color);
             border-radius: 12px;
@@ -31,44 +34,40 @@
         }
         .loot-item {
             border: 1px solid var(--primary-color);
-            box-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="space-y-6">
-        <header class="text-center">
-            <h1 class="teko-title text-5xl font-bold tracking-wider">Loot Drops 🎁</h1>
-            <p class="text-base text-muted-color">Your Watch-to-Win Incentives</p>
-        </header>
+    <header class="pt-16 mb-6 px-2">
+        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Loot Drops 🎁</h1>
+        <p class="text-sm text-text-muted-color">Your Watch-to-Win Incentives</p>
+    </header>
 
-        <div class="card">
-            <h2 class="teko-title text-2xl font-semibold mb-2">How It Works</h2>
-            <p class="text-sm text-muted-color">
-                While watching live matches in the app, you have a chance to receive random Loot Drops! Keep watching to collect exclusive digital rewards, discounts, and giveaway entries.
-            </p>
-        </div>
+    <div class="card">
+        <h2 class="font-teko text-2xl font-semibold mb-2">How It Works</h2>
+        <p class="text-sm text-muted-color">
+            While watching live matches in the app, you have a chance to receive random Loot Drops! Keep watching to collect exclusive digital rewards, discounts, and giveaway entries.
+        </p>
+    </div>
 
-        <div>
-            <h2 class="teko-title text-3xl font-semibold mb-4 ml-1">My Loot</h2>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="card loot-item text-center p-4">
-                    <div class="text-4xl mb-2">🏅</div>
-                    <h3 class="font-bold">Founder's Badge</h3>
-                    <p class="text-xs text-muted-color">Exclusive Profile Badge</p>
-                </div>
-                
-                <div class="card loot-item text-center p-4">
-                    <div class="text-4xl mb-2">🎟️</div>
-                    <h3 class="font-bold">Giveaway Entry</h3>
-                    <p class="text-xs text-muted-color">Official Merchandise</p>
-                </div>
-                
-                <div class="card loot-item text-center p-4">
-                    <div class="text-4xl mb-2">💸</div>
-                    <h3 class="font-bold">15% OFF</h3>
-                    <p class="text-xs text-muted-color">Sponsor Store Code</p>
-                </div>
+    <div>
+        <h2 class="font-teko text-3xl font-semibold mb-4 ml-1">My Loot</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="card loot-item text-center p-4">
+                <div class="text-4xl mb-2">🏅</div>
+                <h3 class="font-bold">Founder's Badge</h3>
+                <p class="text-xs text-muted-color">Exclusive Profile Badge</p>
+            </div>
+            <div class="card loot-item text-center p-4">
+                <div class="text-4xl mb-2">🎟️</div>
+                <h3 class="font-bold">Giveaway Entry</h3>
+                <p class="text-xs text-muted-color">Official Merchandise</p>
+            </div>
+            <div class="card loot-item text-center p-4">
+                <div class="text-4xl mb-2">💸</div>
+                <h3 class="font-bold">15% OFF</h3>
+                <p class="text-xs text-muted-color">Sponsor Store Code</p>
             </div>
         </div>
     </div>

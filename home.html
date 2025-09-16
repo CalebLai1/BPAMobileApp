@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -20,75 +20,117 @@
             font-family: 'Roboto', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            padding: 2rem 1rem 6rem; /* Padding for notch and nav bar */
+            padding: 1rem; /* Adjusted Padding */
         }
-        .teko-title { font-family: 'Teko', sans-serif; }
+        .font-teko { font-family: 'Teko', sans-serif; }
+        .header-title {
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
         .card {
             background-color: var(--surface-color);
             border-radius: 12px;
             padding: 1rem;
             margin-bottom: 1.5rem;
         }
+        /* Gold Scrollbar Styles */
+        body::-webkit-scrollbar { width: 5px; }
+        body::-webkit-scrollbar-track { background: transparent; }
+        body::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
+
+        /* Tab Button Styles */
+        .tab-btn {
+            background-color: transparent;
+            color: var(--text-muted-color);
+            border-bottom: 3px solid transparent;
+            padding: 0 4px 8px 4px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.25rem;
+        }
+        .tab-btn:hover {
+            color: var(--text-color);
+        }
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            font-weight: 600;
+        }
+        .tab-btn.active span {
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <div class="space-y-6">
-        <header class="text-center">
-            <h1 class="teko-title text-5xl font-bold tracking-wider">NECS 2026</h1>
-            <p class="text-base text-muted-color">Welcome to the National Esports Championship</p>
-        </header>
+    <header class="pt-16 mb-6 px-2">
+        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">NECS 2026</h1>
+        <p class="text-sm text-text-muted-color">Welcome to the National Esports Championship</p>
+    </header>
 
-        <div class="card">
-             <h2 class="teko-title text-2xl font-semibold mb-3 border-b border-gray-700 pb-2">Explore the Event</h2>
-             <div class="grid grid-cols-3 gap-4 text-center">
-                 <a href="stats.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
-                     <i class="fas fa-chart-bar text-2xl text-secondary-color"></i>
-                     <span class="block text-xs mt-1">Stats</span>
-                 </a>
-                 <a href="replays.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
-                     <i class="fas fa-video text-2xl text-secondary-color"></i>
-                     <span class="block text-xs mt-1">Replays</span>
-                 </a>
-                 <a href="chat.html" class="p-2 rounded-lg hover:bg-gray-700 transition-colors">
-                     <i class="fas fa-comments text-2xl text-secondary-color"></i>
-                     <span class="block text-xs mt-1">Chat</span>
-                 </a>
-             </div>
+    <div class="card">
+        <h2 class="font-teko text-2xl font-semibold mb-3">Livestream Schedule</h2>
+        <div class="flex gap-4 border-b border-gray-700 mb-4">
+             <button data-game="valorant" class="tab-btn active"><span>Valorant</span></button>
+             <button data-game="rocketleague" class="tab-btn"><span>Rocket League</span></button>
+             <button data-game="smash" class="tab-btn"><span>Smash Bros.</span></button>
         </div>
-
-        <div class="card">
-            <h2 class="teko-title text-2xl font-semibold mb-3">Livestream Schedule</h2>
-            <ul class="space-y-3">
-                <li class="flex justify-between items-center p-2 bg-gray-800 rounded-md">
-                    <div>
-                        <p class="font-bold">Team A vs Team B</p>
-                        <p class="text-sm text-muted-color">Sept 3, 2:00 PM</p>
-                    </div>
-                    <span class="text-red-500 font-bold animate-pulse">● LIVE</span>
-                </li>
-                <li class="flex justify-between items-center p-2">
-                    <div>
-                        <p class="font-bold">Team C vs Team D</p>
-                        <p class="text-sm text-muted-color">Sept 3, 4:00 PM</p>
-                    </div>
-                    <span class="text-gray-400">UPCOMING</span>
-                </li>
+        <ul id="schedule-list" class="space-y-3">
             </ul>
-        </div>
+    </div>
 
-        <a href="#" class="block w-full text-center bg-primary-color py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity">
-            <i class="fas fa-ticket-alt mr-2"></i> Get Your Tickets!
-        </a>
+    <a href="./tickets.html" class="block w-full text-center bg-primary-color py-3 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity mb-6">
+        <i class="fas fa-ticket-alt mr-2"></i> Get Your Tickets!
+    </a>
 
-        <div class="card">
-            <h2 class="teko-title text-2xl font-semibold mb-3">Featured Teams</h2>
-            <div class="grid grid-cols-4 gap-4">
-                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team A</span></div>
-                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team B</span></div>
-                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team C</span></div>
-                <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Team D</span></div>
-            </div>
+    <div class="card">
+        <h2 class="font-teko text-2xl font-semibold mb-3">Featured Teams</h2>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Sentinels</span></div>
+            <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Karmine Corp</span></div>
+            <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">Gen.G</span></div>
+            <div class="flex flex-col items-center"><div class="w-12 h-12 bg-gray-600 rounded-full mb-1"></div><span class="text-xs">FaZe Clan</span></div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleData = {
+                valorant: [
+                    { team1: 'Sentinels', team2: 'EDward Gaming', time: 'Sept 15, 8:30 PM', status: 'LIVE' },
+                    { team1: 'Grand Final', team2: 'Winner\'s Interview', time: 'Sept 15, 10:30 PM', status: 'UPCOMING' }
+                ],
+                rocketleague: [
+                    { team1: 'G2 Stride', team2: 'Gen.G Mobil1', time: 'Sept 15, 8:30 PM', status: 'LIVE' },
+                    { team1: 'Grand Final', team2: 'Trophy Ceremony', time: 'Sept 15, 10:30 PM', status: 'UPCOMING' }
+                ],
+                smash: [
+                    { team1: 'Sparg0', team2: 'acola', time: 'Sept 15, 8:30 PM', status: 'LIVE' },
+                    { team1: 'Grand Final', team2: 'Winner\'s Interview', time: 'Sept 15, 10:30 PM', status: 'UPCOMING' }
+                ]
+            };
+            const scheduleList = document.getElementById('schedule-list');
+            const gameButtons = document.querySelectorAll('.tab-btn');
+            const updateSchedule = (game) => {
+                const matches = scheduleData[game];
+                scheduleList.innerHTML = '';
+                matches.forEach(match => {
+                    const statusHtml = match.status === 'LIVE' ? '<span class="text-red-500 font-bold animate-pulse">● LIVE</span>' : '<span class="text-gray-400">UPCOMING</span>';
+                    const listItem = document.createElement('li');
+                    listItem.className = `flex justify-between items-center p-2 ${match.status === 'LIVE' ? 'bg-gray-800' : ''} rounded-md`;
+                    listItem.innerHTML = `<div><p class="font-bold">${match.team1} vs ${match.team2}</p><p class="text-sm text-muted-color">${match.time}</p></div>${statusHtml}`;
+                    scheduleList.appendChild(listItem);
+                });
+            };
+            gameButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    gameButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const selectedGame = button.dataset.game;
+                    updateSchedule(selectedGame);
+                });
+            });
+            updateSchedule('valorant');
+        });
+    </script>
 </body>
 </html>

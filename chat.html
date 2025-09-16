@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6a0dad;
-            --secondary-color: #00c2ff;
+            --primary-color: #D4AF37;
+            --secondary-color: #bea838;
             --background-color: #121212;
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
@@ -28,10 +28,10 @@
             flex-direction: column;
         }
         .font-teko { font-family: 'Teko', sans-serif; }
-        .header-title { text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color); }
+        .header-title { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); }
         .chat-messages::-webkit-scrollbar { width: 5px; }
         .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
         
         .message-container {
             max-width: 80%;
@@ -44,9 +44,9 @@
 
         .chat-bubble { 
             position: relative;
-            padding-bottom: 28px; /* Space for reactions */
+            padding-bottom: 28px;
         }
-        .chat-bubble.me { background-color: var(--primary-color); }
+        .chat-bubble.me { background-color: var(--secondary-color); color: #111; }
         .chat-bubble.other { background-color: var(--surface-color); }
         
         .reactions {
@@ -99,14 +99,13 @@
     </header>
     
     <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4 chat-messages">
-        <!-- Live chat messages will be injected here -->
     </div>
     
     <div class="p-4 bg-surface-color/80 backdrop-blur-sm border-t border-gray-700 mt-auto flex-shrink-0">
         <div class="flex items-center bg-background-color rounded-full p-1">
             <input id="chat-input" type="text" placeholder="Type your message..." class="bg-transparent w-full p-2 focus:outline-none ml-2 text-white">
             <button id="send-btn" class="bg-primary-color rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                <i class="fas fa-paper-plane text-white"></i>
+                <i class="fas fa-paper-plane text-black"></i>
             </button>
         </div>
     </div>
@@ -122,7 +121,6 @@
             let fakeMessages = [];
             let messageIdCounter = 0;
 
-            // --- MODIFIED: More robust parsing logic using Regex ---
             async function loadChatData() {
                 try {
                     const response = await fetch('chat_data.txt');
@@ -131,7 +129,6 @@
                     }
                     const text = await response.text();
                     
-                    // Split the text into sections based on the headers
                     const sections = text.split(/#.*Messages/);
                     const accountsSection = sections[0];
                     const messagesSection = sections[1];
@@ -140,11 +137,9 @@
                          throw new Error("Could not find account or message sections in chat_data.txt");
                     }
 
-                    // Use regex to find all lines starting with '*' and capture the content
                     const accountMatches = accountsSection.match(/\*\s*(.*)/g) || [];
                     const messageMatches = messagesSection.match(/\*\s*(.*)/g) || [];
 
-                    // Clean up the matched lines to get the raw text
                     const rawAccounts = accountMatches.map(line => line.replace(/\*\s*/, '').trim()).filter(Boolean);
                     const rawMessages = messageMatches.map(line => line.replace(/\*\s*/, '').trim()).filter(Boolean);
                     
@@ -152,7 +147,7 @@
                         throw new Error("Failed to parse accounts or messages from chat_data.txt");
                     }
 
-                    const colors = ['text-secondary-color', 'text-purple-400', 'text-yellow-400', 'text-green-400', 'text-red-400'];
+                    const colors = ['text-yellow-300', 'text-amber-400', 'text-orange-300', 'text-gray-300', 'text-yellow-500'];
                     fakeUsers = rawAccounts.map(name => ({
                         name,
                         color: colors[Math.floor(Math.random() * colors.length)]
@@ -187,7 +182,7 @@
                     messageContainer.className += ' w-full flex justify-start';
                     messageContainer.innerHTML = `
                         <div class="message-container other">
-                             <img src="https://placehold.co/30x30/${user.color.replace('text-', '').split('-')[0]}/FFF?text=${user.name.charAt(0)}" class="rounded-full mr-2 self-end">
+                             <img src="https://placehold.co/30x30/${user.color.replace('text-', '').split('-')[0]}/111?text=${user.name.charAt(0)}" class="rounded-full mr-2 self-end">
                             <div class="chat-bubble other p-3 rounded-lg">
                                 <p class="font-bold text-sm ${user.color}">${user.name}</p>
                                 <p class="text-sm">${message}</p>
@@ -207,7 +202,6 @@
                     addMessage(null, message, true);
                     chatInput.value = '';
 
-                    // Bot reply feature
                     setTimeout(() => {
                         if (fakeUsers.length === 0) return;
                         const randomUser = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
@@ -263,4 +257,3 @@
     </script>
 </body>
 </html>
-
