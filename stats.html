@@ -3,95 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stats</title>
+    <title>NECS 2026 - Player Statistics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
+            --win-green: #4ade80;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .font-teko { font-family: 'Teko', sans-serif; }
-        .card {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 16px;
-        }
-        .header-title {
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-        }
-        body::-webkit-scrollbar { width: 5px; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar { width: 6px; }
         body::-webkit-scrollbar-track { background: transparent; }
-        body::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
+        body::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
+        .header-title {
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .search-bar {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .search-bar:focus-within {
+            outline: none;
+            border-color: var(--gold-dark);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .search-bar input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            width: 100%;
+        }
+        .search-bar input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .section-title {
+             color: var(--text-primary);
+             border-bottom: 1px solid var(--border-color);
+             padding-bottom: 0.75rem;
+             margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-list-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .player-list-item:last-child {
+            border-bottom: none;
+        }
+        .player-list-item:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            transform: translateX(5px);
+        }
+
+        .rankings-table .rank-item {
+            display: grid;
+            grid-template-columns: 40px 1fr 100px;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+         .rankings-table .rank-item:last-child {
+            border-bottom: none;
+        }
+        .rank-number {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .win-loss {
+            font-weight: 500;
+            color: var(--win-green);
+            text-align: right;
+        }
     </style>
 </head>
-<body>
-    <header class="pt-10 mb-6 px-2">
-        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Player Stats</h1>
-        <p class="text-sm text-text-muted-color">Track performance across all games</p>
+<body class="p-4 md:p-8 max-w-3xl mx-auto">
+
+    <!-- Header -->
+    <header class="text-center py-10 mb-8">
+        <h1 class="text-6xl font-serif font-bold tracking-wide header-title">Player Stats</h1>
+        <p class="text-md mt-2 font-light" style="color: var(--text-secondary);">Track performance across all games</p>
     </header>
-    <div class="px-2">
-        <input type="text" placeholder="Search player or team..." class="w-full p-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2" style="background-color: var(--surface-color); --tw-ring-color: var(--primary-color);">
-    </div>
-    
-    <div class="mt-6 px-2">
-        <h3 class="font-teko text-xl" style="color: var(--primary-color);">Trending Players</h3>
-        <div class="card mt-2">
-            <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
-                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=Tenz" class="rounded-full">
-                <div class="ml-4">
-                    <p class="font-bold">Tenz</p>
-                    <p class="text-xs text-text-muted-color">Sentinels - VALORANT</p>
-                </div>
-                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
-            </a>
-            <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
-                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=JK" class="rounded-full">
-                <div class="ml-4">
-                    <p class="font-bold">Jknaps</p>
-                    <p class="text-xs text-text-muted-color">G2 Esports - Rocket League</p>
-                </div>
-                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
-            </a>
-             <a href="#" class="flex items-center p-3 hover:bg-gray-800 transition-colors duration-200 rounded-lg">
-                <img src="https://placehold.co/50x50/1e1e1e/FFF?text=ML" class="rounded-full">
-                <div class="ml-4">
-                    <p class="font-bold">MkLeo</p>
-                    <p class="text-xs text-text-muted-color">Super Smash Bros.</p>
-                </div>
-                <i class="fas fa-chevron-right ml-auto text-text-muted-color"></i>
-            </a>
+
+    <!-- Search -->
+    <div class="mb-12">
+        <div class="relative search-bar">
+            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2" style="color: var(--text-secondary);"></i>
+            <input type="text" placeholder="Search for a player or team..." class="pl-8">
         </div>
     </div>
+    
+    <!-- Trending Players -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-serif font-semibold section-title">Trending Players</h2>
+        <div class="card overflow-hidden">
+            <a href="#" class="player-list-item">
+                <img src="https://placehold.co/50x50/101010/FFF?text=Tenz" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-semibold text-lg">Tenz</p>
+                    <p class="text-sm" style="color: var(--text-secondary);">Sentinels - VALORANT</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto" style="color: var(--text-secondary);"></i>
+            </a>
+            <a href="#" class="player-list-item">
+                <img src="https://placehold.co/50x50/101010/FFF?text=JK" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-semibold text-lg">Jknaps</p>
+                    <p class="text-sm" style="color: var(--text-secondary);">G2 Esports - Rocket League</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto" style="color: var(--text-secondary);"></i>
+            </a>
+            <a href="#" class="player-list-item">
+                <img src="https://placehold.co/50x50/101010/FFF?text=ML" class="rounded-full">
+                <div class="ml-4">
+                    <p class="font-semibold text-lg">MkLeo</p>
+                    <p class="text-sm" style="color: var(--text-secondary);">Super Smash Bros.</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto" style="color: var(--text-secondary);"></i>
+            </a>
+        </div>
+    </section>
 
-     <div class="mt-6 px-2 pb-20">
-        <h3 class="font-teko text-xl" style="color: var(--primary-color);">Team Rankings</h3>
-         <div class="card mt-2 p-3">
-            <div class="flex items-center justify-between text-sm mb-2 p-2 rounded-md bg-gray-900">
-                 <span>1. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=C9" class="inline rounded-full mr-2 w-5 h-5"> Cloud9 (VAL)</span>
-                 <span class="text-green-400">W: 5 / L: 0</span>
-             </div>
-             <div class="flex items-center justify-between text-sm mb-2 p-2">
-                 <span>2. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=G2" class="inline rounded-full mr-2 w-5 h-5"> G2 Esports (RL)</span>
-                  <span class="text-green-400">W: 4 / L: 1</span>
-             </div>
-             <div class="flex items-center justify-between text-sm mb-2 p-2">
-                 <span>3. <img src="https://placehold.co/20x20/1e1e1e/FFF?text=100T" class="inline rounded-full mr-2 w-5 h-5"> 100 Thieves (VAL)</span>
-                  <span class="text-green-400">W: 4 / L: 1</span>
-             </div>
+    <!-- Team Rankings -->
+    <section class="pb-12">
+         <h2 class="text-3xl font-serif font-semibold section-title">Team Rankings</h2>
+         <div class="card rankings-table">
+            <div class="rank-item">
+                <div class="rank-number">1</div>
+                <div class="flex items-center gap-3">
+                    <img src="https://placehold.co/24x24/101010/FFF?text=C9" class="rounded-full">
+                    <span class="font-medium">Cloud9 (VAL)</span>
+                </div>
+                <div class="win-loss">W: 5 / L: 0</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-number">2</div>
+                <div class="flex items-center gap-3">
+                    <img src="https://placehold.co/24x24/101010/FFF?text=G2" class="rounded-full">
+                    <span class="font-medium">G2 Esports (RL)</span>
+                </div>
+                <div class="win-loss">W: 4 / L: 1</div>
+            </div>
+             <div class="rank-item">
+                <div class="rank-number">3</div>
+                <div class="flex items-center gap-3">
+                    <img src="https://placehold.co/24x24/101010/FFF?text=100" class="rounded-full">
+                    <span class="font-medium">100 Thieves (VAL)</span>
+                </div>
+                <div class="win-loss">W: 4 / L: 1</div>
+            </div>
          </div>
-    </div>
+    </section>
+
 </body>
 </html>

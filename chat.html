@@ -3,108 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>NECS 2026 - Community Chat</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
         }
+
         html, body {
             height: 100%;
             overflow: hidden;
         }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
         }
-        .font-teko { font-family: 'Teko', sans-serif; }
-        .header-title { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); }
-        .chat-messages::-webkit-scrollbar { width: 5px; }
-        .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
         
-        .message-container {
-            max-width: 80%;
-            display: flex;
-            position: relative;
-        }
-        .message-container:hover .react-btn {
-            opacity: 1;
+        .header-title {
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
         }
 
-        .chat-bubble { 
-            position: relative;
-            padding-bottom: 28px;
+        .chat-messages::-webkit-scrollbar { width: 6px; }
+        .chat-messages::-webkit-scrollbar-track { background: var(--surface-color); }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .chat-bubble.me { background-color: var(--secondary-color); color: #111; }
-        .chat-bubble.other { background-color: var(--surface-color); }
+        .new-message {
+            animation: slideIn 0.4s ease-out;
+        }
         
-        .reactions {
-            position: absolute;
-            bottom: 5px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            padding: 2px 6px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
+        .message-container:hover .react-btn {
+             opacity: 1;
+             transform: scale(1);
         }
 
         .react-btn {
             position: absolute;
-            top: -12px;
+            top: 50%;
+            margin-top: -14px;
             background: var(--surface-color);
+            border: 1px solid var(--border-color);
             border-radius: 50%;
             width: 28px;
             height: 28px;
-            border: 1px solid var(--background-color);
             cursor: pointer;
             opacity: 0;
+            transform: scale(0.8);
             transition: opacity 0.2s ease, transform 0.2s ease;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 14px;
+            z-index: 10;
         }
         .message-container.me .react-btn { left: -14px; }
         .message-container.other .react-btn { right: -14px; }
         .react-btn:hover {
-            transform: scale(1.2);
+            transform: scale(1.2) !important;
+            border-color: var(--gold-main);
         }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .new-message {
-            animation: slideIn 0.3s ease;
+        .reactions {
+            position: absolute;
+            bottom: 4px;
+            right: 12px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(2px);
         }
     </style>
 </head>
 <body>
-    <header class="pt-10 pb-4 px-6 bg-surface-color/80 backdrop-blur-sm border-b border-gray-700 flex-shrink-0">
-        <h1 class="text-3xl font-teko tracking-wider uppercase header-title">Community Chat</h1>
-        <p class="text-sm text-text-muted-color flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span><span id="online-count">3,482</span> Fans Online</p>
+    <header class="text-center pt-8 pb-4 px-6 border-b border-border-color flex-shrink-0">
+        <h1 class="text-5xl font-serif font-bold tracking-wide header-title">Community Chat</h1>
+        <p class="text-sm mt-1 font-light flex items-center justify-center" style="color: var(--text-secondary);"><span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span><span id="online-count">3,482</span> Fans Online</p>
     </header>
     
-    <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4 chat-messages">
+    <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-6 chat-messages">
+        <!-- Messages will appear here -->
     </div>
     
-    <div class="p-4 bg-surface-color/80 backdrop-blur-sm border-t border-gray-700 mt-auto flex-shrink-0">
-        <div class="flex items-center bg-background-color rounded-full p-1">
-            <input id="chat-input" type="text" placeholder="Type your message..." class="bg-transparent w-full p-2 focus:outline-none ml-2 text-white">
-            <button id="send-btn" class="bg-primary-color rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+    <div class="p-4 border-t border-border-color mt-auto flex-shrink-0">
+        <div class="flex items-center bg-surface-color rounded-full p-1 border border-border-color focus-within:border-gold-main transition-colors">
+            <input id="chat-input" type="text" placeholder="Type your message..." class="bg-transparent w-full p-2 focus:outline-none ml-2 text-text-primary placeholder-text-secondary">
+            <button id="send-btn" class="bg-gold-main rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 hover:scale-105 transition-transform" style="background: linear-gradient(90deg, var(--gold-dark), var(--gold-main));">
                 <i class="fas fa-paper-plane text-black"></i>
             </button>
         </div>
@@ -147,7 +154,7 @@
                         throw new Error("Failed to parse accounts or messages from chat_data.txt");
                     }
 
-                    const colors = ['text-yellow-300', 'text-amber-400', 'text-orange-300', 'text-gray-300', 'text-yellow-500'];
+                    const colors = ['#D4AF37', '#E6D389', '#B9973E', '#F0E68C', '#FFD700'];
                     fakeUsers = rawAccounts.map(name => ({
                         name,
                         color: colors[Math.floor(Math.random() * colors.length)]
@@ -158,42 +165,48 @@
 
                 } catch (error) {
                     console.error("Failed to load chat data:", error);
-                    chatMessages.innerHTML = `<p class="text-center text-red-500 p-4"><b>Error:</b> Could not load live chat data. Please ensure the file 'chat_data.txt' is in the same directory and is formatted correctly.</p>`;
+                    chatMessages.innerHTML = `<p class="text-center text-red-500 p-4"><b>Error:</b> Could not load live chat data. Please ensure 'chat_data.txt' is available and correctly formatted.</p>`;
                 }
             }
 
             const addMessage = (user, message, isMe = false) => {
-                const messageContainer = document.createElement('div');
+                const messageWrapper = document.createElement('div');
                 const messageId = `msg-${messageIdCounter++}`;
-                messageContainer.id = messageId;
-                messageContainer.classList.add('new-message');
+                messageWrapper.classList.add('new-message');
 
                 if (isMe) {
-                    messageContainer.className += ' w-full flex justify-end';
-                    messageContainer.innerHTML = `
-                        <div class="message-container me">
-                            <div class="chat-bubble me p-3 rounded-lg">
-                                <p class="text-sm">${message}</p>
+                    messageWrapper.className += ' w-full flex justify-end';
+                    messageWrapper.innerHTML = `
+                        <div class="relative w-full max-w-lg flex justify-end">
+                             <div class="message-container me relative">
+                                <div class="react-btn" data-target="${messageId}"><i class="fas fa-heart text-red-400"></i></div>
+                                <div id="${messageId}" class="relative p-3 rounded-xl rounded-br-none text-black" style="background: linear-gradient(90deg, var(--gold-dark), var(--gold-main));">
+                                    <p class="text-sm font-medium">${message}</p>
+                                </div>
                             </div>
-                            <div class="react-btn" data-target="${messageId}"><i class="fas fa-heart text-red-500"></i></div>
                         </div>
                     `;
                 } else {
-                    messageContainer.className += ' w-full flex justify-start';
-                    messageContainer.innerHTML = `
-                        <div class="message-container other">
-                             <img src="https://placehold.co/30x30/${user.color.replace('text-', '').split('-')[0]}/111?text=${user.name.charAt(0)}" class="rounded-full mr-2 self-end">
-                            <div class="chat-bubble other p-3 rounded-lg">
-                                <p class="font-bold text-sm ${user.color}">${user.name}</p>
-                                <p class="text-sm">${message}</p>
+                    messageWrapper.className += ' w-full flex justify-start';
+                    messageWrapper.innerHTML = `
+                         <div class="relative w-full max-w-lg flex items-end gap-3">
+                            <img src="https://placehold.co/40x40/${user.color.substring(1)}/0a0a0a?text=${user.name.charAt(0)}" class="rounded-full flex-shrink-0">
+                            <div class="message-container other relative">
+                                <div id="${messageId}" class="relative bg-surface-color p-3 rounded-xl rounded-bl-none">
+                                    <p class="font-bold text-sm" style="color: ${user.color};">${user.name}</p>
+                                    <p class="text-sm text-text-primary">${message}</p>
+                                </div>
+                                <div class="react-btn" data-target="${messageId}"><i class="fas fa-heart text-red-400"></i></div>
                             </div>
-                             <div class="react-btn" data-target="${messageId}"><i class="fas fa-heart text-red-500"></i></div>
                         </div>
                     `;
                 }
                 
-                chatMessages.appendChild(messageContainer);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessages.appendChild(messageWrapper);
+                // Smart scrolling
+                if (chatMessages.scrollHeight - chatMessages.scrollTop < chatMessages.clientHeight + 100) {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
             };
 
             const sendUserMessage = () => {
@@ -217,16 +230,16 @@
             });
 
             function startChatSimulation() {
-                addMessage({ name: 'NECS_Bot', color: 'text-yellow-400' }, 'Welcome to the official NECS chat! Be respectful.');
+                addMessage({ name: 'NECS_Bot', color: '#D4AF37' }, 'Welcome to the official NECS chat! Be respectful and enjoy the matches.');
                 setInterval(() => {
                     if (fakeUsers.length === 0) return;
                     const randomUser = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
                     const randomMessage = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
                     addMessage(randomUser, randomMessage);
-                }, 4000); 
+                }, 4500); 
 
                 setInterval(() => {
-                    const currentCount = parseInt(onlineCountEl.textContent.replace(',', ''));
+                    const currentCount = parseInt(onlineCountEl.textContent.replace(/,/g, ''));
                     const fluctuation = Math.floor(Math.random() * 50) - 25;
                     onlineCountEl.textContent = (currentCount + fluctuation).toLocaleString();
                 }, 5000);
@@ -236,14 +249,13 @@
                 const reactBtn = e.target.closest('.react-btn');
                 if (reactBtn) {
                     const targetId = reactBtn.dataset.target;
-                    const messageContainer = document.getElementById(targetId);
-                    const bubble = messageContainer.querySelector('.chat-bubble');
+                    const bubble = document.getElementById(targetId);
 
                     let reactionsDiv = bubble.querySelector('.reactions');
                     if (!reactionsDiv) {
                         reactionsDiv = document.createElement('div');
                         reactionsDiv.className = 'reactions';
-                        reactionsDiv.innerHTML = '❤️ <span class="ml-1 font-semibold">1</span>';
+                        reactionsDiv.innerHTML = '❤️ <span class="ml-1 font-semibold text-white">1</span>';
                         bubble.appendChild(reactionsDiv);
                     } else {
                         const countSpan = reactionsDiv.querySelector('span');

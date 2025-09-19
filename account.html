@@ -3,101 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Info</title>
+    <title>NECS 2026 - My Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            animation: fadeIn 0.8s ease-in-out;
             padding: 2rem 1rem 6rem;
         }
-        .teko-title { font-family: 'Teko', sans-serif; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        .header-title {
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
         .card {
             background-color: var(--surface-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        .achievement-item.unlocked { color: var(--primary-color); }
-        .achievement-item.locked { color: var(--text-muted-color); opacity: 0.6; }
 
-        /* Custom class for primary color text */
-        .text-primary {
-             color: var(--primary-color);
+        .achievement-item.unlocked { color: var(--gold-main); }
+        .achievement-item.locked { color: var(--text-secondary); opacity: 0.5; }
+
+        .followed-tag {
+            background-color: var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
         }
-        /* Add cursor pointer to toggles */
-        .toggle-btn {
+        .followed-tag:hover {
+            background-color: var(--gold-dark);
+            color: #111;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
             cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--gold-main);
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
         }
     </style>
 </head>
-<body>
-    <div class="space-y-6">
-        <div class="card flex items-center space-x-4">
-            <img src="https://placehold.co/80x80/1e1e1e/D4AF37?text=JD" alt="User Avatar" class="w-20 h-20 rounded-full border-2 border-primary" style="border-color: var(--primary-color)">
+<body class="max-w-2xl mx-auto">
+    <header class="text-center py-10 mb-2">
+        <h1 class="text-6xl font-serif font-bold tracking-wide header-title">My Account</h1>
+    </header>
+
+    <main>
+        <div class="card flex items-center space-x-6">
+            <img src="https://placehold.co/100x100/0a0a0a/D4AF37?text=JD" alt="User Avatar" class="w-24 h-24 rounded-full border-2" style="border-color: var(--gold-main);">
             <div>
-                <h2 class="text-2xl font-bold">John Doe</h2>
-                <p class="teko-title text-xl" style="color: var(--secondary-color);">🏅 Gold Fan</p>
+                <h2 class="font-serif text-4xl font-bold">John Doe</h2>
+                <p class="text-xl" style="color: var(--gold-main);">🏅 Gold Fan</p>
             </div>
         </div>
         
         <div class="card">
-            <h3 class="teko-title text-2xl font-semibold mb-3">My Achievements 🏆</h3>
-            <ul class="space-y-3">
-                <li class="achievement-item unlocked flex items-center"><i class="fas fa-check-circle w-6"></i><span>"First Five": Watched 5 matches.</span></li>
-                <li class="achievement-item unlocked flex items-center"><i class="fas fa-check-circle w-6"></i><span>"Town Crier": Posted 50 comments.</span></li>
-                <li class="achievement-item locked flex items-center"><i class="fas fa-lock w-6"></i><span>"The Oracle": Follow a team to the finals.</span></li>
+            <h3 class="font-serif text-3xl font-semibold mb-4">My Achievements 🏆</h3>
+            <ul class="space-y-4">
+                <li class="achievement-item unlocked flex items-center gap-3"><i class="fas fa-check-circle text-lg"></i><span>"First Five": Watched 5 matches.</span></li>
+                <li class="achievement-item unlocked flex items-center gap-3"><i class="fas fa-check-circle text-lg"></i><span>"Town Crier": Posted 50 comments.</span></li>
+                <li class="achievement-item locked flex items-center gap-3"><i class="fas fa-lock text-lg"></i><span>"The Oracle": Follow a team to the finals.</span></li>
             </ul>
         </div>
         
         <div class="card">
-            <h3 class="teko-title text-2xl font-semibold mb-3">Followed Teams & Players ⭐</h3>
-            <div class="flex space-x-4">
-                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Fnatic</span>
-                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">Sparg0</span>
-                <span class="bg-gray-700 px-3 py-1 rounded-full text-sm">G2 Stride</span>
+            <h3 class="font-serif text-3xl font-semibold mb-4">Followed Teams & Players ⭐</h3>
+            <div class="flex flex-wrap gap-3">
+                <span class="followed-tag">Fnatic</span>
+                <span class="followed-tag">Sparg0</span>
+                <span class="followed-tag">G2 Stride</span>
             </div>
         </div>
         
         <div class="card">
-            <h3 class="teko-title text-2xl font-semibold mb-3">Notification Settings 🔔</h3>
-            <ul class="space-y-2">
-                <li class="flex justify-between items-center"><p>Match Start Times</p><i class="fas fa-toggle-on text-2xl text-primary toggle-btn"></i></li>
-                <li class="flex justify-between items-center"><p>Score Updates</p><i class="fas fa-toggle-on text-2xl text-primary toggle-btn"></i></li>
-                <li class="flex justify-between items-center"><p>Bracket Changes</p><i class="fas fa-toggle-off text-2xl text-gray-500 toggle-btn"></i></li>
+            <h3 class="font-serif text-3xl font-semibold mb-5">Notification Settings 🔔</h3>
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center"><p>Match Start Times</p>
+                    <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </li>
+                <li class="flex justify-between items-center"><p>Score Updates</p>
+                    <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </li>
+                <li class="flex justify-between items-center"><p>Bracket Changes</p>
+                    <label class="toggle-switch"><input type="checkbox"><span class="slider"></span></label>
+                </li>
             </ul>
         </div>
 
-        <button class="w-full bg-yellow-900/80 py-2.5 rounded-lg font-bold text-lg hover:bg-yellow-900 transition-colors">Logout</button>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleButtons = document.querySelectorAll('.toggle-btn');
-
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Toggle the font awesome icon class
-                    button.classList.toggle('fa-toggle-on');
-                    button.classList.toggle('fa-toggle-off');
-
-                    // Toggle the color classes
-                    button.classList.toggle('text-primary');
-                    button.classList.toggle('text-gray-500');
-                });
-            });
-        });
-    </script>
+        <button class="w-full text-center text-lg font-semibold py-3 rounded-xl transition-colors" style="background-color: #4a2121; color: #ff8a8a;">Logout</button>
+    </main>
 </body>
 </html>
+

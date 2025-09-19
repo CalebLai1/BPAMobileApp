@@ -3,77 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Replays</title>
+    <title>NECS 2026 - Match Replays</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .font-teko { font-family: 'Teko', sans-serif; }
-        .card {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 16px;
-        }
-        .header-title {
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-        }
-        body::-webkit-scrollbar { width: 5px; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar { width: 6px; }
         body::-webkit-scrollbar-track { background: transparent; }
-        body::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
+        body::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
+        .header-title {
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .replay-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .replay-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .thumbnail-container img {
+            transition: transform 0.4s ease;
+        }
+
+        .replay-card:hover .thumbnail-container img {
+            transform: scale(1.05);
+        }
+
+        .thumbnail-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .replay-card:hover .thumbnail-overlay {
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .play-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .replay-card:hover .play-icon {
+            transform: scale(1);
+            opacity: 1;
+        }
+
     </style>
 </head>
-<body>
-    <header class="pt-10 mb-6 px-2">
-        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Match Replays</h1>
-        <p class="text-sm text-text-muted-color">Catch up on all the action</p>
-    </header>
-    
-    <div class="card p-4">
-        <div class="relative">
-            <img src="https://placehold.co/600x400/121212/D4AF37?text=Valorant+Grand+Final" class="rounded-lg w-full">
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
-            </div>
-        </div>
-        <h3 class="font-bold mt-3">GRAND FINAL: Cloud9 vs 100 Thieves</h3>
-        <p class="text-xs text-text-muted-color">VALORANT - Full Match VOD</p>
-    </div>
+<body class="p-4 md:p-8 max-w-3xl mx-auto">
 
-    <div class="card p-4">
-        <div class="relative">
-            <img src="https://placehold.co/600x400/121212/D4AF37?text=Rocket+League+Upset" class="rounded-lg w-full">
-             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
+    <!-- Header -->
+    <header class="text-center py-10 mb-10">
+        <h1 class="text-6xl font-serif font-bold tracking-wide header-title">Match Replays</h1>
+        <p class="text-md mt-2 font-light" style="color: var(--text-secondary);">Catch up on all the action</p>
+    </header>
+
+    <!-- Replays Grid -->
+    <main class="pb-12">
+        <a href="#" class="block replay-card">
+            <div class="thumbnail-container">
+                <img src="https://placehold.co/600x338/0a0a0a/D4AF37?text=Valorant+Grand+Final" class="w-full" alt="Valorant Grand Final Thumbnail">
+                <div class="thumbnail-overlay">
+                    <i class="fas fa-play-circle play-icon"></i>
+                </div>
             </div>
-        </div>
-        <h3 class="font-bold mt-3">UPSET ALERT: G2 vs FaZe Clan</h3>
-        <p class="text-xs text-text-muted-color">Rocket League - Highlights</p>
-    </div>
-    
-    <div class="card p-4 pb-20">
-        <div class="relative">
-            <img src="https://placehold.co/600x400/121212/D4AF37?text=Smash+Bros+Clutch" class="rounded-lg w-full">
-             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <i class="fas fa-play-circle text-white text-5xl opacity-80"></i>
+            <div class="p-6">
+                <h3 class="font-serif font-bold text-2xl">GRAND FINAL: Cloud9 vs 100 Thieves</h3>
+                <p class="text-sm mt-1" style="color: var(--text-secondary);">VALORANT - Full Match VOD</p>
             </div>
-        </div>
-        <h3 class="font-bold mt-3">DOWN TO THE WIRE: MkLeo vs Sparg0</h3>
-        <p class="text-xs text-text-muted-color">Super Smash Bros. - Last Stock</p>
-    </div>
+        </a>
+
+        <a href="#" class="block replay-card">
+            <div class="thumbnail-container">
+                <img src="https://placehold.co/600x338/0a0a0a/D4AF37?text=Rocket+League+Upset" class="w-full" alt="Rocket League Upset Thumbnail">
+                <div class="thumbnail-overlay">
+                    <i class="fas fa-play-circle play-icon"></i>
+                </div>
+            </div>
+            <div class="p-6">
+                <h3 class="font-serif font-bold text-2xl">UPSET ALERT: G2 vs FaZe Clan</h3>
+                <p class="text-sm mt-1" style="color: var(--text-secondary);">Rocket League - Highlights</p>
+            </div>
+        </a>
+        
+        <a href="#" class="block replay-card">
+            <div class="thumbnail-container">
+                <img src="https://placehold.co/600x338/0a0a0a/D4AF37?text=Smash+Bros+Clutch" class="w-full" alt="Smash Bros Clutch Thumbnail">
+                <div class="thumbnail-overlay">
+                    <i class="fas fa-play-circle play-icon"></i>
+                </div>
+            </div>
+            <div class="p-6">
+                <h3 class="font-serif font-bold text-2xl">DOWN TO THE WIRE: MkLeo vs Sparg0</h3>
+                <p class="text-sm mt-1" style="color: var(--text-secondary);">Super Smash Bros. - Last Stock</p>
+            </div>
+        </a>
+    </main>
+
 </body>
 </html>

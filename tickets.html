@@ -3,90 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Your Tickets</title>
+    <title>NECS 2026 - Secure Your Pass</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .font-teko { font-family: 'Teko', sans-serif; }
-        .header-title {
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-        }
-        .card {
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid transparent;
-            transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--secondary-color);
-        }
-        body::-webkit-scrollbar { width: 5px; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar { width: 6px; }
         body::-webkit-scrollbar-track { background: transparent; }
-        body::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 5px; }
+        body::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
+        .header-title {
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .ticket-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .ticket-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border-color: var(--gold-dark);
+        }
+
+        .card-recommended {
+            border-color: var(--gold-main);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+        }
+        .card-recommended:hover {
+             box-shadow: 0 15px 50px rgba(212, 175, 55, 0.25);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: -45px;
+            background: var(--gold-main);
+            color: #111;
+            padding: 4px 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transform: rotate(45deg);
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .feature-list .fa-check-circle {
+            color: var(--gold-main);
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-main));
+            border-radius: 12px;
+            color: #111;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            padding: 1rem 0;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+        }
+        .cta-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            width: 100%;
+            padding: 1rem 0;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .secondary-button:hover {
+            background-color: var(--gold-main);
+            border-color: var(--gold-main);
+            color: #111;
+        }
     </style>
 </head>
-<body>
-    <header class="pt-16 mb-6 px-2">
-        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Secure Your Pass</h1>
-        <p class="text-sm text-text-muted-color">Experience the NECS 2026 Grand Finals Live!</p>
+<body class="p-4 md:p-8 max-w-3xl mx-auto">
+
+    <header class="text-center py-10 mb-10">
+        <h1 class="text-6xl font-serif font-bold tracking-wide header-title">Secure Your Pass</h1>
+        <p class="text-md mt-2 font-light" style="color: var(--text-secondary);">Experience the NECS 2026 Grand Finals Live!</p>
     </header>
 
-    <div class="card">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="font-teko text-3xl font-semibold">General Admission</h2>
-            <span class="text-3xl font-bold font-teko" style="color: var(--primary-color);">$75</span>
+    <main class="pb-12">
+        <!-- General Admission -->
+        <div class="ticket-card">
+            <div class="flex justify-between items-baseline mb-4">
+                <h2 class="font-serif text-4xl font-semibold">General Admission</h2>
+                <span class="text-4xl font-serif font-bold" style="color: var(--gold-main);">$75</span>
+            </div>
+            <ul class="space-y-3 text-secondary mb-8 feature-list">
+                <li><i class="fas fa-check-circle"></i><span>Full Day Access to All Stages</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Grandstand Seating</span></li>
+            </ul>
+            <button class="secondary-button">Select Pass</button>
         </div>
-        <ul class="space-y-2 text-muted-color mb-6">
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Full Day Access to All Stages</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Grandstand Seating</span></li>
-        </ul>
-        <button class="w-full bg-gray-600/80 py-2.5 rounded-lg font-bold text-lg hover:bg-gray-600 transition-colors">Select Pass</button>
-    </div>
 
-    <div class="card" style="border-color: var(--primary-color);">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="font-teko text-3xl font-semibold">Weekend Pass</h2>
-            <span class="text-3xl font-bold font-teko" style="color: var(--primary-color);">$125</span>
+        <!-- Weekend Pass -->
+        <div class="ticket-card card-recommended">
+            <div class="popular-badge">Popular</div>
+            <div class="flex justify-between items-baseline mb-4">
+                <h2 class="font-serif text-4xl font-semibold">Weekend Pass</h2>
+                <span class="text-4xl font-serif font-bold" style="color: var(--gold-main);">$125</span>
+            </div>
+            <ul class="space-y-3 text-secondary mb-8 feature-list">
+                <li><i class="fas fa-check-circle"></i><span>Full Weekend Access (Sat & Sun)</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Grandstand Seating</span></li>
+                <li><i class="fas fa-check-circle"></i><span>10% Off Merchandise</span></li>
+            </ul>
+            <button class="cta-button">Purchase Pass</button>
         </div>
-        <ul class="space-y-2 text-muted-color mb-6">
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Full Weekend Access (Sat & Sun)</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Grandstand Seating</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>10% Off Merchandise</span></li>
-        </ul>
-        <button class="w-full py-2.5 rounded-lg font-bold text-lg transition-opacity hover:opacity-90" style="background-color: var(--primary-color); color: #111;">Purchase Pass</button>
-    </div>
-    
-    <div class="card">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="font-teko text-3xl font-semibold">VIP Pass</h2>
-            <span class="text-3xl font-bold font-teko" style="color: var(--primary-color);">$250</span>
+        
+        <!-- VIP Pass -->
+        <div class="ticket-card">
+            <div class="flex justify-between items-baseline mb-4">
+                <h2 class="font-serif text-4xl font-semibold">VIP Pass</h2>
+                <span class="text-4xl font-serif font-bold" style="color: var(--gold-main);">$250</span>
+            </div>
+            <ul class="space-y-3 text-secondary mb-8 feature-list">
+                <li><i class="fas fa-check-circle"></i><span>Full Weekend Access + Early Entry</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Premium Floor Seating</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Exclusive VIP Merch Bag</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Access to VIP Lounge & Bar</span></li>
+                <li><i class="fas fa-check-circle"></i><span>Player Meet & Greet Entry</span></li>
+            </ul>
+            <button class="secondary-button">Select Pass</button>
         </div>
-        <ul class="space-y-2 text-muted-color mb-6">
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Full Weekend Access + Early Entry</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Premium Floor Seating</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Exclusive VIP Merch Bag</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Access to VIP Lounge & Bar</span></li>
-             <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6"></i><span>Player Meet & Greet Entry</span></li>
-        </ul>
-        <button class="w-full bg-gray-600/80 py-2.5 rounded-lg font-bold text-lg hover:bg-gray-600 transition-colors">Select Pass</button>
-    </div>
+    </main>
+
 </body>
 </html>

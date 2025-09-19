@@ -3,73 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewards</title>
+    <title>NECS 2026 - Loot Drops</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #D4AF37;
-            --secondary-color: #bea838;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-color: #ffffff;
-            --text-muted-color: #a0a0a0;
+            --gold-main: #D4AF37;
+            --gold-dark: #b18c21;
+            --background-dark: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2f2f2f;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .font-teko { font-family: 'Teko', sans-serif; }
+
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: transparent; }
+        body::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+
         .header-title {
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            background: linear-gradient(90deg, #E6D389, var(--gold-main), #B9973E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
         }
+
         .card {
             background-color: var(--surface-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        .loot-item {
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+
+        .loot-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
+        .loot-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-main);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+        .loot-card .icon {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            filter: grayscale(30%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .loot-card:hover .icon {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
-<body>
-    <header class="pt-16 mb-6 px-2">
-        <h1 class="text-4xl font-teko tracking-wider uppercase header-title">Loot Drops 🎁</h1>
-        <p class="text-sm text-text-muted-color">Your Watch-to-Win Incentives</p>
+<body class="p-4 md:p-8 max-w-3xl mx-auto">
+
+    <header class="text-center py-10 mb-10">
+        <h1 class="text-6xl font-serif font-bold tracking-wide header-title">Loot Drops</h1>
+        <p class="text-md mt-2 font-light" style="color: var(--text-secondary);">Your Watch-to-Win Incentives</p>
     </header>
 
-    <div class="card">
-        <h2 class="font-teko text-2xl font-semibold mb-2">How It Works</h2>
-        <p class="text-sm text-muted-color">
-            While watching live matches in the app, you have a chance to receive random Loot Drops! Keep watching to collect exclusive digital rewards, discounts, and giveaway entries.
-        </p>
-    </div>
+    <main class="pb-12">
+        <div class="card">
+            <h2 class="font-serif text-3xl font-semibold mb-3">How It Works</h2>
+            <p class="text-md leading-relaxed" style="color: var(--text-secondary);">
+                While watching live matches in the app, you have a chance to receive random Loot Drops! Keep watching to collect exclusive digital rewards, discounts, and giveaway entries.
+            </p>
+        </div>
 
-    <div>
-        <h2 class="font-teko text-3xl font-semibold mb-4 ml-1">My Loot</h2>
-        <div class="grid grid-cols-2 gap-4">
-            <div class="card loot-item text-center p-4">
-                <div class="text-4xl mb-2">🏅</div>
-                <h3 class="font-bold">Founder's Badge</h3>
-                <p class="text-xs text-muted-color">Exclusive Profile Badge</p>
-            </div>
-            <div class="card loot-item text-center p-4">
-                <div class="text-4xl mb-2">🎟️</div>
-                <h3 class="font-bold">Giveaway Entry</h3>
-                <p class="text-xs text-muted-color">Official Merchandise</p>
-            </div>
-            <div class="card loot-item text-center p-4">
-                <div class="text-4xl mb-2">💸</div>
-                <h3 class="font-bold">15% OFF</h3>
-                <p class="text-xs text-muted-color">Sponsor Store Code</p>
+        <div>
+            <h2 class="font-serif text-4xl font-semibold mb-6 text-center">My Loot</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="loot-card">
+                    <div class="icon">🏅</div>
+                    <h3 class="font-serif font-bold text-xl">Founder's Badge</h3>
+                    <p class="text-sm" style="color: var(--text-secondary);">Exclusive Profile Badge</p>
+                </div>
+
+                <div class="loot-card">
+                    <div class="icon">🎟️</div>
+                    <h3 class="font-serif font-bold text-xl">Giveaway Entry</h3>
+                    <p class="text-sm" style="color: var(--text-secondary);">Official Merchandise</p>
+                </div>
+
+                <div class="loot-card">
+                    <div class="icon">💸</div>
+                    <h3 class="font-serif font-bold text-xl">15% OFF</h3>
+                    <p class="text-sm" style="color: var(--text-secondary);">Sponsor Store Code</p>
+                </div>
+
             </div>
         </div>
-    </div>
+    </main>
+
 </body>
 </html>
