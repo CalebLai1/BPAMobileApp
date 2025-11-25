@@ -173,25 +173,16 @@
             width: 100%;
         }
 
-        .tournament-bracket__team--winner .tournament-bracket__name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .tournament-bracket__team--winner .tournament-bracket__score { 
-            color: var(--gold-main); 
-            font-weight: 700;
-        }
-
         .tournament-bracket__name, .tournament-bracket__score {
             font-size: 1rem;
             color: var(--text-secondary);
             padding: 0.5rem;
             white-space: nowrap;
         }
-         .tournament-bracket__score {
+        .tournament-bracket__score {
             text-align: right;
             font-weight: 600;
-         }
+        }
     </style>
 </head>
 
@@ -209,38 +200,430 @@
     </div>
 
     <main class="flex-1 flex flex-col min-h-0">
+        <!-- VALORANT BRACKET -->
         <div id="valorant-bracket" class="bracket-content active bracket-container">
             <div class="tournament-bracket">
                 <div class="tournament-bracket__round">
                     <h3 class="tournament-bracket__round-title">Quarterfinals</h3>
                     <ul class="tournament-bracket__list">
-                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Sentinels</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">LOUD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li>
-                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Paper Rex</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Gen.G</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li>
-                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Fnatic</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">100 Thieves</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li>
-                        <li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">EDward Gaming</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Karmine Corp</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li>
+                        <!-- Sentinels 2 - 1 LOUD (CURRENT SCORE) -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Sentinels</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">LOUD</td>
+                                            <td class="tournament-bracket__score">1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- Paper Rex 0 - 2 Gen.G -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Paper Rex</td>
+                                            <td class="tournament-bracket__score">0</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Gen.G</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- Fnatic 2 - 1 100 Thieves -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Fnatic</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">100 Thieves</td>
+                                            <td class="tournament-bracket__score">1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- EDG 2 - 0 KC -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">EDward Gaming</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Karmine Corp</td>
+                                            <td class="tournament-bracket__score">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
+
+                <!-- Semifinals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Semifinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Finals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Finals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
+        <!-- ROCKET LEAGUE BRACKET -->
         <div id="rl-bracket" class="bracket-content bracket-container">
             <div class="tournament-bracket">
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Quarterfinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Karmine Corp</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Moist Esports</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">G2 Stride</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Rule One</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Team BDS</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Team Falcons</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Gen.G Mobil1</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">FaZe Clan</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Quarterfinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <!-- KC 4 - 2 Moist Esports -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Karmine Corp</td>
+                                            <td class="tournament-bracket__score">4</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Moist Esports</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- G2 4 - 3 Rule One -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">G2 Stride</td>
+                                            <td class="tournament-bracket__score">4</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Rule One</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- BDS 4 - 1 Falcons -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Team BDS</td>
+                                            <td class="tournament-bracket__score">4</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Team Falcons</td>
+                                            <td class="tournament-bracket__score">1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- Gen.G 4 - 3 FaZe -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Gen.G Mobil1</td>
+                                            <td class="tournament-bracket__score">4</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">FaZe Clan</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Semifinals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Semifinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Finals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Finals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
+        <!-- SMASH BRACKET -->
         <div id="smash-bracket" class="bracket-content bracket-container">
             <div class="tournament-bracket">
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Quarterfinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">MkLeo</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Miya</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Sparg0</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Light</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">acola</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Glutonny</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Tweek</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">Sonix</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Semifinals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
-                <div class="tournament-bracket__round"><h3 class="tournament-bracket__round-title">Finals</h3><ul class="tournament-bracket__list"><li class="tournament-bracket__item"><div class="tournament-bracket__match"><table class="w-full"><tbody><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr><tr class="tournament-bracket__team"><td class="tournament-bracket__name">TBD</td><td class="tournament-bracket__score">TBA</td></tr></tbody></table></div></li></ul></div>
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Quarterfinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <!-- MkLeo 3 - 1 Miya -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">MkLeo</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Miya</td>
+                                            <td class="tournament-bracket__score">1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- Sparg0 3 - 0 Light -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Sparg0</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Light</td>
+                                            <td class="tournament-bracket__score">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- acola 3 - 2 Glutonny -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">acola</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Glutonny</td>
+                                            <td class="tournament-bracket__score">2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <!-- Tweek 1 - 3 Sonix -->
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Tweek</td>
+                                            <td class="tournament-bracket__score">1</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">Sonix</td>
+                                            <td class="tournament-bracket__score">3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Semifinals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Semifinals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Finals (STILL TBD) -->
+                <div class="tournament-bracket__round">
+                    <h3 class="tournament-bracket__round-title">Finals</h3>
+                    <ul class="tournament-bracket__list">
+                        <li class="tournament-bracket__item">
+                            <div class="tournament-bracket__match">
+                                <table class="w-full">
+                                    <tbody>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                        <tr class="tournament-bracket__team">
+                                            <td class="tournament-bracket__name">TBD</td>
+                                            <td class="tournament-bracket__score">TBA</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.tab-btn');
